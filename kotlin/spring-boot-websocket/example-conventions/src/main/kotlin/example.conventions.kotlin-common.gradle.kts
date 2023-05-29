@@ -35,9 +35,9 @@ tasks.withType<KotlinCompile> {
 
 spotless {
     kotlin {
-        ktfmt("0.44").kotlinlangStyle()
+        ktfmt("0.44").dropboxStyle()
     }
     kotlinGradle {
-        ktfmt("0.44").kotlinlangStyle()
+        ktfmt("0.44").dropboxStyle()
     }
 }
