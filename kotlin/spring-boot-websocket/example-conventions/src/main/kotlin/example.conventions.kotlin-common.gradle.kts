@@ -1,5 +1,18 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
+    idea
     kotlin("jvm")
+
+    id("com.diffplug.spotless")
+}
+
+group = "io.github.chehsunliu.example"
+
+kotlin {
+    jvmToolchain {
+        this.languageVersion.set(JavaLanguageVersion.of(17))
+    }
 }
 
 repositories {
@@ -12,4 +25,19 @@ dependencies {
 
 tasks.named<Test>("test") {
     useJUnitPlatform()
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        freeCompilerArgs = listOf("-Xjsr305=strict")
+    }
+}
+
+spotless {
+    kotlin {
+        ktfmt("0.44").kotlinlangStyle()
+    }
+    kotlinGradle {
+        ktfmt("0.44").kotlinlangStyle()
+    }
 }
